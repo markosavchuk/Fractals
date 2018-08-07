@@ -67,6 +67,9 @@
     <PackageReference Include="SkiaSharp">
       <Version>1.60.2</Version>
     </PackageReference>
+    <PackageReference Include="SkiaSharp.Views.Forms">
+      <Version>1.60.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
