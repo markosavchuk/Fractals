@@ -14,5 +14,12 @@
   <ItemGroup>
     <Folder Include="ViewModels\Common\" />
     <Folder Include="Behavior\" />
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Views\KochPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\MainPage.xaml.cs" />
   </ItemGroup>
 </Project>
