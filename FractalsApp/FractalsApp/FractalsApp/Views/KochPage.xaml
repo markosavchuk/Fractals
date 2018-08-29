@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
              xmlns:local="clr-namespace:FractalsApp"
+             xmlns:skiaLocal="clr-namespace:FractalsApp.Controls"
              x:Class="FractalsApp.Views.KochPage"
              Title="{Binding Title}">
-    <skia:SKCanvasView>
-        <skia:SKCanvasView.Behaviors>
+    <skiaLocal:TouchedCanvasView>
+        <skiaLocal:TouchedCanvasView.Behaviors>
             <local:PaintSurfaceCommandBehavior Command="{Binding PaintCommand}" />
-        </skia:SKCanvasView.Behaviors>
-    </skia:SKCanvasView>
+        </skiaLocal:TouchedCanvasView.Behaviors>
+    </skiaLocal:TouchedCanvasView>
 </ContentPage>

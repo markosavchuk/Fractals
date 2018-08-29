@@ -15,6 +15,7 @@
     <Folder Include="ViewModels\Common\" />
     <Folder Include="Behavior\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Controls\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Views\KochPage.xaml" />

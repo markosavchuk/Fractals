@@ -15,6 +15,10 @@ namespace FractalsApp.ViewModels {
 
         public ICommand PaintCommand { get; private set; }
 
+        private SKPath _path;
+        private SKPaint _strokePaint;
+        private bool _painted;
+
         public KochPageViewModel ( INavigationService navigationService )
             : base( navigationService ) {
             Title = "Koch snowflake";
@@ -22,34 +26,38 @@ namespace FractalsApp.ViewModels {
             PaintCommand = new DelegateCommand<SKPaintSurfaceEventArgs>( Draw );
         }
 
-        void Draw ( SKPaintSurfaceEventArgs canvasArgs ) {
+        private void Draw ( SKPaintSurfaceEventArgs canvasArgs ) {
 
-            List<SKPoint> points = new List<SKPoint>();
+            if ( !_painted ) {
+                List<SKPoint> points = new List<SKPoint>();
 
-            points.AddRange( MathHelper.GetPointsCenteredEquilateralTrianlge(
-                canvasArgs.Info.Width, canvasArgs.Info.Height ) );
+                points.AddRange( MathHelper.GetPointsCenteredEquilateralTrianlge(
+                    canvasArgs.Info.Width, canvasArgs.Info.Height ) );
 
-            AddPointsForKochSnowflake( ref points, 6 );
+                AddPointsForKochSnowflake( ref points, 6 );
 
-            SKPath path = new SKPath();
+                _path = new SKPath();
 
-            path.MoveTo( points[0] );
+                _path.MoveTo( points[0] );
 
-            for ( int i = 1; i < points.Count; i++ ) {
-                path.LineTo( points[i] );
+                for ( int i = 1; i < points.Count; i++ ) {
+                    _path.LineTo( points[i] );
+                }
+
+                _path.Close();
+
+                _strokePaint = new SKPaint {
+                    Style = SKPaintStyle.Stroke,
+                    Color = SKColors.Magenta,
+                    StrokeWidth = 1
+                };
             }
-
-            path.Close();
-
-            SKPaint strokePaint = new SKPaint {
-                Style = SKPaintStyle.Stroke,
-                Color = SKColors.Magenta,
-                StrokeWidth = 1
-            };
 
             var canvas = canvasArgs.Surface.Canvas;
             canvas.Clear();
-            canvas.DrawPath( path, strokePaint );
+            canvas.DrawPath( _path, _strokePaint );
+
+            _painted = true;
         }
 
         private void AddPointsForKochSnowflake ( ref List<SKPoint> points, int iteration ) 
